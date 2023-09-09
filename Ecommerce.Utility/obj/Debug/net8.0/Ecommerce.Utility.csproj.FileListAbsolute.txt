@@ -1,0 +1,13 @@
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\bin\Debug\net8.0\Ecommerce.Utility.deps.json
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\bin\Debug\net8.0\Ecommerce.Utility.dll
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\bin\Debug\net8.0\Ecommerce.Utility.pdb
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\obj\Debug\net8.0\Ecommerce.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\obj\Debug\net8.0\Ecommerce.Utility.AssemblyInfoInputs.cache
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\obj\Debug\net8.0\Ecommerce.Utility.AssemblyInfo.cs
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\obj\Debug\net8.0\Ecommerce.Utility.csproj.CoreCompileInputs.cache
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\obj\Debug\net8.0\Ecommerce.Utility.dll
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\obj\Debug\net8.0\refint\Ecommerce.Utility.dll
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\obj\Debug\net8.0\Ecommerce.Utility.pdb
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\obj\Debug\net8.0\ref\Ecommerce.Utility.dll
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\obj\Debug\net8.0\Ecommerce.Utility.csproj.AssemblyReference.cache
+C:\Users\khalo\OneDrive\سطح المكتب\asp.net\Ecommerece Web\Ecommerce.Utility\obj\Debug\net8.0\Ecommerce.Utility.sourcelink.json

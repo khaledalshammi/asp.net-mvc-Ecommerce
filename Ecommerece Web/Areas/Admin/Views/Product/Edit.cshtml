@@ -1,0 +1,80 @@
+﻿@model ProductVM
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <input name="PID" value="@Model.Product.Id" hidden />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Update Product</h2>
+            <hr />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Product.Name"></label>
+            <input asp-for="Product.Name" class="form-control" />
+            <span asp-validation-for="Product.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Product.Description"></label>
+            <input asp-for="Product.Description" class="form-control" />
+            <span asp-validation-for="Product.Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Product.Price"></label>
+            <input asp-for="Product.Price" class="form-control" />
+            <span asp-validation-for="Product.Price" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Product.Quantity"></label>
+            <input asp-for="Product.Quantity" class="form-control" />
+            <span asp-validation-for="Product.Quantity" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Product.CategoryId"></label>
+            <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select">
+                <option disabled selected>--Select Category--</option>
+            </select>
+            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Product.Images"></label>
+            <input type="file" name="files" class="form-control" multiple />
+            <span asp-validation-for="Product.Images" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="ProductIds">Select Products:</label>
+            <select multiple name="ProductIds" id="ProductIds" class="form-control">
+                @foreach (Product obj in Model.Products)
+                {
+                    <option value="@obj.Id">@obj.Name</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">
+            Update
+        </button>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back To List
+        </a>
+    </div>
+</form>
+<div class="col-2 pt-3">
+    @*<img class="mt-4" src="~/@Model.Product.ImageUrl" width="100%" />*@
+    @if (Model.Product.Images != null)
+    {
+        foreach (Image image in Model.Product.Images)
+        {
+            <div class="border p-1 m-2 text-center">
+                <img src="@image.Url" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                <a asp-action="DeleteImage" class="btn btn-danger" asp-route-imageId="@image.Id">
+                    <i class="bi bi-trash-fill"></i> Delete
+                </a>
+            </div>
+        }
+    }
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

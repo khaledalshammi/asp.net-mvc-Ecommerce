@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+
+@if (User.IsInRole("Admin"))
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Content Managment
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="nav-link text-dark dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+            <a class="nav-link text-dark dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
+            <a class="nav-link text-dark dropdown-item" asp-area="Admin" asp-controller="Role" asp-action="Index">Role</a>
+            <a class="nav-link text-dark dropdown-item" asp-area="Admin" asp-controller="Notification" asp-action="Index">Notification</a>
+            <div class="dropdown-divider"></div>
+            <a class="nav-link text-dark dropdown-item" asp-area="Admin" asp-controller="News" asp-action="Index">News</a>
+            <a class="nav-link text-dark dropdown-item" asp-area="Customer" asp-controller="Inquiry" asp-action="Index">Inquiries</a>
+            <a class="nav-link text-dark dropdown-item" asp-area="Customer" asp-controller="Order" asp-action="Index">Orders</a>
+            <a class="nav-link text-dark dropdown-item" asp-area="Admin" asp-controller="Discount" asp-action="Index">Discount Codes</a>
+            <a class="nav-link text-dark dropdown-item" asp-area="Admin" asp-controller="SubscriptionType" asp-action="Index">Subscription Types</a>
+        </div>
+    </li>
+}

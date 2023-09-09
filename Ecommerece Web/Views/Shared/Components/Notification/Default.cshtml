@@ -1,0 +1,30 @@
+﻿@model int
+<style>
+    .notificationclass{
+       position: relative;
+    }
+    .countnotification {
+        position: absolute;
+        left: 9px;
+        top: -5px;
+        z-index: 213;
+        color: white;
+        font-weight: 600;
+        background-color: red;
+        width: 24px;
+        border-radius: 100px;
+        text-align: center;
+    }
+</style>
+@if (Model > 0)
+{
+    <a class="notificationclass nav-link text-dark ml-3 mt-1 mr-2 p-0" asp-area="Customer" asp-controller="Home" asp-action="Notification">
+        <i style="font-size: 24px" class="bi bi-bell-fill mr-2"></i><span class="countnotification">@Model</span>
+    </a>
+}
+else
+{
+    <a class="nav-link text-dark ml-3 mt-1 p-0 mr-2" asp-area="Customer" asp-controller="Home" asp-action="Notification">
+        <i style="font-size: 24px" class="bi bi-bell-fill mr-2"></i>
+    </a>
+}

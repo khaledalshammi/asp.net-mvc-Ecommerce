@@ -1,0 +1,61 @@
+﻿@model Inquiry
+<div class="row pt-3 pb-3 d-flex justify-content-center">
+    <h1 class="text-center text-primary">@Model.Type</h1>
+</div>
+<div class="row">
+    <div class="card px-4 pt-3 pb-4 col-8 m-auto">
+        <div>
+            <div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4" data-mdb-ripple-color="light">
+                @if (Model.ImgUrl != null)
+                {
+                    <div class="img-fluid p-1 m-2 text-center">
+                        <img src="~/@Model.ImgUrl" width="90%" height="600px" idth="90%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                    </div>
+                }
+            </div>
+            <p class="text-dark"><span class="text-secondary">Content: </span>@Model.Content</p>
+            <div class="row d-flex">
+                <div class="col-6 text-start">
+                    <p class="text-dark"><span class="text-secondary">User Name: </span>@Model.User.Name</p>
+                </div>
+                <div class="col-6 text-center">
+                    <p class="text-dark"><span class="text-secondary">User Email: </span>@Model.User.Email</p>
+                </div>
+            </div>
+            @if (Model.Closed != null && Model.ClosedAt != null)
+            {
+                <div class="row d-flex">
+                    <div class="col-6 text-start">
+                        <p class="text-dark"><span class="text-secondary">Closed: </span>@Model.Closed</p>
+                    </div>
+                    <div class="col-6 text-center">
+                        <p class="text-dark"><span class="text-secondary">ClosedAt: </span>@Model.ClosedAt</p>
+                    </div>
+                </div>
+            }
+            @if (Model.Reply == false)
+            {
+                <div class="row text-center">
+                    <a asp-action="Reply" asp-route-id=@Model.Id>
+                        <h1 class="btn btn-success mb-3">Reply</h1>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <p class="text-dark"><span class="text-secondary">Replied: </span>True</p>
+            }
+            @if (Model.Closed == false)
+            {
+                <div class="row text-center">
+                    <a asp-action="Close" asp-route-id=@Model.Id>
+                        <h1 class="btn btn-warning mb-3">Close</h1>
+                    </a>
+                </div>
+            }
+            <div class="row text-end">
+                <u class="text-secondary">@Model.CreatedAt.DateTime</u>
+            </div>
+        </div>
+    </div>
+</div>

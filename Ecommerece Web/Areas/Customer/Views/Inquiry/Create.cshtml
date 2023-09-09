@@ -1,0 +1,50 @@
+﻿@model Inquiry
+<form method="post" asp-action="Create" enctype="multipart/form-data">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Inquiry</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Content"></label>
+            <input asp-for="Content" class="form-control" />
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ImgUrl"></label>
+            <input type="file" name="file" class="form-control" />
+            <span asp-validation-for="ImgUrl" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="type">Select Type:</label>
+            <select required name="type" id="type" class="form-control">
+                <option value="" disabled selected>~~Select~~</option>
+                <option value="Issue">Issue</option>
+                <option value="Informational">Informational</option>
+                <option value="Product">Product</option>
+                <option value="Service">Service</option>
+                <option value="Price">Price</option>
+                <option value="Availability">Availability</option>
+                <option value="Order">Order</option>
+                <option value="Job">Job</option>
+                <option value="Suggestion">Suggestion</option>
+                <option value="Partnership">Partnership</option>
+                <option value="Investment">Investment</option>
+                <option value="Customer_Support">Customer_Support</option>
+                <option value="Membership">Membership</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">
+            Create
+        </button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back To Home
+        </a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

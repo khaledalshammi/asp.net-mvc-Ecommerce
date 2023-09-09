@@ -1,0 +1,48 @@
+﻿@model News
+
+<div class="border p-3 mt-4">
+    <div class="row pb-2">
+        <h2 class="text-primary">Display News</h2>
+        <hr />
+    </div>
+    @if (Model.ImageUrl != null)
+    {
+        <div class="border p-1 m-2 text-center">
+            <img src="~/@Model.ImageUrl" width="80%" style="border-radius:5px; border:1px solid #bbb9b9" />
+        </div>
+        <div class="border p-1 m-2 text-center">
+            <video src="~/@Model.VideoUrl" type="video" width="80%" class="card-video-top rounded" controls />
+        </div>
+    }
+    <div class="mb-3">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" disabled class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Content"></label>
+        <input asp-for="Content" disabled class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ImageUrl"></label>
+        <input asp-for="ImageUrl" disabled class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="VideoUrl"></label>
+        <input asp-for="VideoUrl" disabled class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="UrlDescription"></label>
+        <input asp-for="UrlDescription" disabled class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Url"></label>
+        <input asp-for="Url" disabled class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="CreatedAt"></label>
+        <input asp-for="CreatedAt" disabled class="form-control" />
+    </div>
+    <a asp-controller="News" asp-action="Index" class="btn btn-secondary" style="width:150px">
+        Back To List
+    </a>
+</div>

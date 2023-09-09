@@ -1,0 +1,39 @@
+﻿@model List<News>
+@foreach(News news in Model)
+{
+    <div class="row">
+        <div class="card px-4 pt-3 col-8 m-auto">
+            <div>
+                <div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4" data-mdb-ripple-color="light">
+                    @if(news.ImageUrl != null)
+                    {
+                        <div class="img-fluid p-1 m-2 text-center">
+                            <img src="~/@news.ImageUrl" width="90%" height="60%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                        </div>
+                    }
+                    @if (news.ImageUrl != null)
+                    {
+                        <div class="p-1 m-2 text-center">
+                            <video src="~/@news.VideoUrl" type="video" width="90%" height="60%" class="img-fluid card-video-top rounded" controls />
+                        </div>
+                    }
+                </div>
+                <div class="row mb-3 pr-4 pl-4">
+                    <div class="col-6">
+                        @if (news.Url != null)
+                        {
+                            <a href="@news.Url" class="text-secondary">
+                                @news.UrlDescription
+                            </a>
+                        }
+                    </div>
+                    <div class="col-6 text-end">
+                        <u class="text-secondary">@news.CreatedAt.DateTime</u>
+                    </div>
+                </div>
+                <h5 class="text-primary">@news.Title</h5>
+                <p>@news.Content</p>
+            </div>
+        </div>
+    </div>
+}

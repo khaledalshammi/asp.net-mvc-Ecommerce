@@ -1,0 +1,118 @@
+﻿@model Job
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <input name="url" type="text" hidden value="@ViewBag.url" />
+    <input name="JobId" type="text" hidden value=@Model.Id />
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Update Job</h2>
+            <hr />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Position"></label>
+            <input asp-for="Position" class="form-control" />
+            <span asp-validation-for="Position" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Requirement"></label>
+            <input asp-for="Requirement" class="form-control" />
+            <span asp-validation-for="Requirement" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Image"></label>
+            <input type="file" name="file" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="valid">Select Status:</label>
+            <select name="available" id="valid" class="form-control">
+                <option value="" disabled selected>~~Select~~</option>
+                <option value="1">Available</option>
+                <option value="0">NotAvailable</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Hours"></label>
+            <input asp-for="Hours" class="form-control" />
+            <span asp-validation-for="Hours" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Salary"></label>
+            <input asp-for="Salary" class="form-control" />
+            <span asp-validation-for="Salary" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="From"></label>
+            <input asp-for="From" class="form-control" />
+            <span asp-validation-for="From" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="To"></label>
+            <input asp-for="To" class="form-control" />
+            <span asp-validation-for="To" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="City"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Country"></label>
+            <input asp-for="Country" class="form-control" />
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Days"></label>
+            <input asp-for="Days" class="form-control" />
+            <span asp-validation-for="Days" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Off"></label>
+            <input asp-for="Off" class="form-control" />
+            <span asp-validation-for="Off" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Location"></label>
+            <input asp-for="Location" class="form-control" />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">
+            Update
+        </button>
+        @if(ViewBag.url != null)
+        {
+            <a asp-controller="Job" asp-action="MyJobs" class="btn btn-secondary" style="width:150px">
+                Back To List
+            </a>
+        }
+        else
+        {
+            <a asp-controller="Job" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                Back To List
+            </a>
+        }
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

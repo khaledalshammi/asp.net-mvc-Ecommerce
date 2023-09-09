@@ -1,0 +1,98 @@
+﻿@model List<Category>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Categories</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Category
+            </a>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Product
+                </th>
+                <th>#</th>
+                <th>#</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.OrderBy(i => i.Name))
+            {
+                <tr>
+                    <td>
+                        @obj.Name
+                    </td>
+                    <td>
+                        <img src="~/@obj.ImageUrl" class="card-img-top rounded" height="80px"/>
+                        @*<img class="mt-4" src="~/@Model.Product.ImageUrl" width="100%" />*@
+                    </td>
+                    <td>
+                        @{
+                            string description = @obj.Description;
+                            string[] words = description.Split(' ');
+                            int maxWords = 10;
+                            string truncatedDescription = string.Join(" ", words.Take(maxWords));
+                            bool addEllipsis = words.Length > maxWords;
+                        }
+                        @truncatedDescription @if (addEllipsis)
+                        {
+                            <span>...</span>
+                        }
+                    </td>
+                    @if (obj.Products != null)
+                    {
+                        <td>
+                            @obj.Products.Count()
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            0
+                        </td>
+                    }
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-route-id="@obj.Id" asp-controller="Category" asp-action="Edit"
+                                class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i>Edit
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-route-id="@obj.Id" asp-controller="Category" asp-action="Delete"
+                                class="btn btn-danger mx-2">
+                                <i class="bi bi-trash-fill"></i>Delete
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-route-id="@obj.Id" asp-controller="Category" asp-action="Details" class="btn btn-success mx-2">
+                                <i class="bi"></i>Details
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

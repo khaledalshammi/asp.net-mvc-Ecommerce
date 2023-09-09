@@ -1,0 +1,86 @@
+﻿@model List<Inquiry>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Inquiries</h2>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Type
+                </th>
+                <th>
+                    User
+                </th>
+                <th>
+                    CreatedAt
+                </th>
+
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.OrderByDescending(i => i.CreatedAt))
+            {
+                <tr>
+                    <td>
+                        @obj.Type
+                    </td>
+                    <td>
+                        @obj.User.Name
+                    </td>
+                    <td>
+                        @obj.CreatedAt.DateTime
+                    </td>
+                    @if(obj.Closed == false)
+                    {
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-route-id=@obj.Id asp-controller="Inquiry" asp-action="Close"
+                                   class="btn btn-primary mx-2">
+                                    <i class="bi bi-check2-circle"></i>Close
+                                </a>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-success">
+                            Closed
+                        </td>
+                    }
+                    @if (obj.Reply == false)
+                    {
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-route-id=@obj.Id asp-controller="Inquiry" asp-action="Reply"
+                                   class="btn btn-danger mx-2">
+                                    <i class="bi bi-reply"></i>Reply
+                                </a>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-success">
+                            Replied
+                        </td>
+                    }
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-route-id="@obj.Id" asp-controller="Inquiry" asp-action="Details" class="btn btn-success mx-2">
+                                <i class="bi bi-book"></i>Details
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

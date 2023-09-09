@@ -1,0 +1,76 @@
+﻿@model List<Notification>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Notifications</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Notification" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Notification
+            </a>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Content
+                </th>
+                <th>
+                    User
+                </th>
+                <th>
+                    Sent at
+                </th>
+                <th>
+                    Read
+                </th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.OrderByDescending(i => i.SentAt))
+            {
+                <tr>
+                    <td>
+                        @obj.Title
+                    </td>
+                    <td>
+                        @obj.Content
+                    </td>
+                    <td>
+                        @obj.User.Name
+                    </td>
+                    <td>
+                        @obj.SentAt.DateTime
+                    </td>
+                    @if(obj.IsRead == true)
+                    {
+                        <td>
+                            YES
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            NO
+                        </td>
+                    }
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-route-id="@obj.Id" asp-controller="News" asp-action="Delete"
+                               class="btn btn-danger mx-2">
+                                <i class="bi bi-trash-fill"></i>Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,148 @@
+﻿@model List<Product>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Products</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Product
+            </a>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Created
+                </th>
+                <th>
+                    Updated
+                </th>
+                <th>
+                    Comments
+                </th>
+                <th>
+                    Likes
+                </th>
+                <th>
+                    DisLikes
+                </th>
+                <th>
+                    Related Product
+                </th>
+                <th>#</th>
+                <th>#</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.OrderBy(i => i.Name))
+            {
+                <tr>
+                    <td>
+                        @obj.Name
+                    </td>
+                    <td>
+                        @obj.Price
+                    </td>
+                    <td>
+                        @obj.Quantity
+                    </td>
+                    <td>
+                        @obj.Category.Name
+                    </td>
+                    @if(obj.Images.Count> 0 || obj.Images != null)
+                    {
+                        <td>
+                            <img src="@obj.Images.FirstOrDefault().Url" class="card-img-top rounded" />
+                            @*<img class="mt-4" src="~/@Model.Product.ImageUrl" width="100%" />*@
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Null
+                        </td>
+                    }
+                    <td>
+                        @obj.CreatedAt.DateTime
+                    </td>
+                    <td>
+                        @obj.UpdatedAt.DateTime
+                    </td>
+                    @if (obj.Comments != null)
+                    {
+                        <td>
+                            @obj.Comments.Count()
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            0
+                        </td>
+                    }
+                    <td>
+                        @obj.Likes
+                    </td>
+                    <td>
+                        @obj.DisLikes
+                    </td>
+                    @if (obj.RelatedProductsId != null && obj.RelatedProductsId.Count()>0)
+                    {
+                        <td>
+                            @obj.RelatedProductsId.Count()
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            0
+                        </td>
+                    }
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-route-id="@obj.Id" asp-controller="Product" asp-action="Edit"
+                               class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i>Edit
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-route-id="@obj.Id" asp-controller="Product" asp-action="Delete"
+                               class="btn btn-danger mx-2">
+                                <i class="bi bi-trash-fill"></i>Delete
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-route-id="@obj.Id" asp-controller="Product" asp-action="Details" class="btn btn-success mx-2">
+                                <i class="bi"></i>Details
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

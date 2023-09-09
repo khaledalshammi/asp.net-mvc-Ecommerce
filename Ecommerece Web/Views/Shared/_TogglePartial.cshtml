@@ -1,0 +1,15 @@
+﻿@model User
+<link rel="stylesheet" href="~/css/toggle.css" />
+<input asp-for="EnabledNotification" type="checkbox" id="toggle" style="margin-top: 5px;" />
+
+<label for="toggle" class="switch" style="margin-bottom: 0; margin-top: 12px;"></label>
+
+<script>
+    const toggle = document.getElementById('toggle');
+
+    toggle.addEventListener('change', function () {
+        if (toggle.checked) {
+        } else {
+        }
+    });
+</script>

@@ -1,0 +1,35 @@
+﻿.switch {
+    font-size: 62.5%;
+    position: relative;
+    display: inline-block;
+    width: 1.7rem;
+    height: 1.2rem;
+    background-color: #cc1010;
+    border-radius: 2rem;
+    transition: all 0.3s linear;
+    margin-top: 59px;
+}
+.switch::after {
+    font-size: 62.5%;
+    content: "";
+    position: absolute;
+    top: 0.15rem;
+    left: .1rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: all 0.3s linear;
+}
+
+input[type="checkbox"]:checked + .switch:after {
+    translate: 0.6rem 0;
+}
+
+input[type="checkbox"]:checked + .switch {
+    background-color: #04681d;
+}
+
+input[type="checkbox"] {
+    display: none;
+}

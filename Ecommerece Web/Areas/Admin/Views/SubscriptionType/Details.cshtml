@@ -1,0 +1,33 @@
+﻿@model SubscriptionTypeVM
+@{
+    string disabled = "";
+    if (Model.User.SubscriptionId != null)
+    {
+        disabled = "disabled";
+    }
+}
+@if (disabled == "disabled")
+{
+    <div class="alert alert-danger d-flex justify-content-center pt-2 pb-2 mt-4 mb-3">
+        <h5 style="margin-bottom: 4px;" class="text-center">You are already subscribed at @Model.User.Subscription.Type.Title the Package</h5>
+    </div>
+}
+
+<div class="card-group mb-4">
+    @foreach(SubscriptionType subscriptionType in Model.SubscriptionTypes.OrderBy(i=>i.Price))
+    {
+        <div class="card">
+            <img height="350px" class="card-img-top" src="~/@subscriptionType.Image" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-center text-primary">@subscriptionType.Title</h5>
+                <p class="card-text text-center">@subscriptionType.Description</p>
+                <h6 class="card-text text-center">$@subscriptionType.Price</h6>
+            </div>
+            <div class="card-footer d-flex justify-content-center @disabled">
+                <a class="btn btn-success text-center @disabled" asp-route-id=@subscriptionType.Id asp-action="Subscription" asp-controller="Order" asp-area="Customer">
+                    Subscribe
+                </a>
+            </div>
+        </div>
+    }
+</div>

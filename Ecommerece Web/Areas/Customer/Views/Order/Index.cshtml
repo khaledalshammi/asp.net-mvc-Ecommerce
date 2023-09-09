@@ -1,0 +1,111 @@
+﻿@model List<Order>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Orders</h2>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Order Number
+                </th>
+                <th>
+                    For
+                </th>
+                <th>
+                    Phone Number
+                </th>
+                <th>
+                    TotalPrice
+                </th>
+                <th>
+                    Paid
+                </th>
+                <th>
+                    Arrive
+                </th>
+                <th>
+                    Refund
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.OrderByDescending(i => i.OrderNumber))
+            {
+                <tr>
+                    <td>
+                        @obj.OrderNumber
+                    </td>
+                    <td>
+                        @obj.Email
+                    </td>
+                    <td>
+                        @obj.PhoneNumber
+                    </td>
+                    <td>
+                        @obj.TotalPrice
+                    </td>
+                    @if (obj.Paid && obj.Refund == false)
+                    {
+                        <td>
+                            Yes
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            No
+                        </td>
+                    }
+                    @if (obj.Arrived && obj.Refund == false)
+                    {
+                        <td>
+                            Yes
+                        </td>
+                    }
+                    else
+                    {
+                        if (obj.Refund == true)
+                        {
+                            <td>
+                                No
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <div class="w-75 btn-group" role="group">
+                                    <a asp-route-id="@obj.Id" asp-controller="Order" asp-action="Arrive"
+                                       class="btn btn-success mx-2">
+                                        <i class="bi bi-check-square"></i>Arrive
+                                    </a>
+                                </div>
+                            </td>
+                        }
+                    }
+                    @if (obj.Refund)
+                    {
+                        <td>
+                            Yes
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-route-id="@obj.Id" asp-controller="Order" asp-action="Refund"
+                                   class="btn btn-danger mx-2">
+                                    <i class="bi bi-x-square"></i>Refund
+                                </a>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

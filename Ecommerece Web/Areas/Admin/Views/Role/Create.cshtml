@@ -1,0 +1,51 @@
+﻿@model Role
+
+<form method="post" asp-action="Create">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Role</h2>
+            <hr />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="valid">Select Status:</label>
+            <select name="valid" id="valid" class="form-control">
+                <option value="" disabled selected>~~Select~~</option>
+                <option value="1">Available</option>
+                <option value="0">NotAvailable</option>
+            </select>
+        </div>
+        @*
+        <div class="mb-3">
+        <label for="Valid"></label>
+        <input type="text" name="valid" class="form-control" required />
+        </div>
+        *@
+        @*
+        <div class="mb-3">
+        <label asp-for="StatUs"></label>
+        <input asp-for="StatUs" class="form-control"/>
+        @Html.DropDownList("StatUs", Html.GetEnumSelectList<StatUs>(),
+        "Select Role", new {@class = "form-control disabled selected"})
+        <span asp-validation-for="StatUs" class="text-danger"></span>
+        </div>
+        *@
+        <button type="submit" class="btn btn-primary" style="width:150px">
+            Create
+        </button>
+        <a asp-controller="Role" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back To List
+        </a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}

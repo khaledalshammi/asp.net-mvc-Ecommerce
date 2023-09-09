@@ -1,0 +1,17 @@
+﻿@model Inquiry
+
+<form asp-action="Reply" method="post">
+    <input hidden value=@Model.Id name="id" />
+    <div class="row d-flex p-1 mb-3">
+        <h5 class="form-control text-center">
+            @Model.Content
+        </h5>
+    </div>
+    <div class="row d-flex p-1 mb-3">
+        <h3 class="text-center mb-3">Reply</h3>
+        <input name="reply" id="reply" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary" style="width:150px">
+        Reply
+    </button>
+</form>

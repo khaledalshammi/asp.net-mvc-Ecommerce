@@ -1,0 +1,57 @@
+﻿@model SubscriptionType
+
+<form method="post" enctype="multipart/form-data">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create SubscriptionType</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DiscountAmount"></label>
+            <input asp-for="DiscountAmount" class="form-control" />
+            <span asp-validation-for="DiscountAmount" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="NumberOfDiscount"></label>
+            <input asp-for="NumberOfDiscount" class="form-control" />
+            <span asp-validation-for="NumberOfDiscount" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CartDiscountPercentage"></label>
+            <input asp-for="CartDiscountPercentage" class="form-control" />
+            <span asp-validation-for="CartDiscountPercentage" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Image"></label>
+            <input type="file" name="file" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">
+            Create
+        </button>
+        <a asp-controller="SubscriptionType" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back To List
+        </a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

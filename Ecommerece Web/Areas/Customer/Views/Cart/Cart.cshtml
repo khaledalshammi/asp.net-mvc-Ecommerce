@@ -1,0 +1,191 @@
+﻿@model CartVM
+
+<br />
+<div class="card shadow border-0">
+    <div class="card-header bg-secondary bg-gradient text-light ml-0 py-4">
+        <div class="row px-4">
+            <div class="col-6">
+                <h5 class="pt-2 text-white">
+                    Shopping Cart
+                </h5>
+            </div>
+
+        </div>
+    </div>
+    <div class="card-body my-4">
+        <div class="row">
+        </div>
+        <div class="row mb-2 pb-3">
+            <div class="col-md-2 offset-md-1">
+                <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary text-uppercase mb-4 btn-sm"><small>Continue Shopping</small></a>
+            </div>
+            <div class="row">
+                <p class="col-8 mb-3 m-auto text-warning text-center">If the product becomes out of stock. It will be automatically removed from the cart</p>
+            </div>
+            <div class="col-md-10 offset-md-1">
+
+                @foreach (var item in Model.ShoppingCarts)
+                {
+                    <div class="row border-bottom pb-3">
+                        <div class="d-none d-lg-block col-lg-1 text-center py-2">
+                            @*<img src="@item.Product.ImageUrl" class="rounded" width="100%" />*@
+                            @if (item.Product.Images != null && item.Product.Images.Count() > 0)
+                            {
+                                <img src="@item.Product.Images.FirstOrDefault().Url" class="card-img-top rounded w-100" />
+                            }
+                            else
+                            {
+                                <img src="https://placehold.co/500x600/png" class="card-img-top rounded w-100" />
+                            }
+                        </div>
+                        <div class="col-12 col-lg-6 pt-md-3">
+                            <h5 class="text-uppercase text-primary"><strong>@item.Product.Name</strong></h5>
+                            <p><small>@Html.Raw(item.Product.Description)</small></p>
+                            <p><small class="text-secondary">Product Stock: @item.Product.Quantity</small></p>
+                        </div>
+                        <div class="col-12  col-lg-5 text-center row">
+                            <div class="col-3 text-md-right pt-2 pt-md-4">
+                                <h6 class="fw-semibold">
+                                    @item.Product.Price.ToString("c")
+                                    <span class="text-muted">&nbsp;x&nbsp;</span>@item.Quantity
+                                </h6>
+                            </div>
+                            <div class="col-6 col-sm-4 col-lg-6 pt-2">
+                                @{
+                                    var disabled = "";
+                                    if (item.Product.Quantity <= item.Quantity)
+                                    {
+                                        disabled = "disabled";
+                                    }
+                                }
+                                <div class="w-75 btn-group" role="group">
+                                    <a asp-action="Plus" asp-route-PID="@item.ProductId" class="btn btn-outline-primary bg-gradient @disabled py-2">
+                                        <i class="bi bi-plus-square"></i>
+                                    </a> &nbsp;
+                                    <a asp-action="Minus" asp-route-PID="@item.ProductId" class="btn btn-outline-primary bg-gradient py-2">
+                                        <i class="bi bi-dash-square"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="col-3 col-sm-4 col-lg-2 offset-lg-1 text-right pt-2">
+                                <a asp-action="Delete" asp-route-PID="@item.ProductId" class="btn btn-danger bg-gradient py-2 ">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+        @if (Model.DiscountCode != null)
+        {
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <h5 class="text-secondary text-center col-auto mr-3">
+                        Code:
+                        <span class="text-warning">@Model.DiscountCode.Code</span>
+                    </h5>
+                    <a asp-area="Customer" asp-controller="Cart" asp-action="CancelDiscountCode" asp-route-id="@Model.DiscountCode.Id" class="text-center col-auto" style="margin-left: 5px; margin-top: -1px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            if(Model.Cart.TotalQuantity > 0)
+            {
+                <div class="d-flex justify-content-center mb-2">
+                    <form method="post" class="form-inline my-2 my-lg-0" asp-area="Customer" asp-controller="Cart" asp-action="DiscountCode">
+                        <div class="d-flex">
+                            <input class="form-control mr-sm-2" name="code" type="text" placeholder="Discount Code">
+                            <button class="btn btn-outline-warning ml-2 my-2 my-sm-0" type="submit">Apply</button>
+                        </div>
+                        @if (Model.ValidCode == "false")
+                        {
+                            <p class="text-center text-danger mt-2 mb-2">Invalid Code</p>
+                        }
+                    </form>
+                </div>
+                @*
+                    <form method="post" asp-area="Customer" asp-controller="Cart" asp-action="DiscountCode">
+                    <div class="row d-flex justify-content-center">
+                    <input style="margin-right:-3px; margin-top:1px; border-right: none;" type="text" name="code" class="rounded col-3 border border-warning border-right-0 border-right-transparent" />
+                    <button type="submit" class="btn btn-warning border col-1">Apply</button>
+                    </div>
+                    @if (Model.ValidCode == "false")
+                    {
+                    <p class="text-center text-danger mt-2 mb-2">Invalid Code</p>
+                    }
+                    </form>
+                *@
+            }
+        }
+        @if(Model.User.Subscription != null)
+        {
+            <h6 class="text-center text-success pt-1">Already Applied %@Model.User.Subscription.Type.CartDiscountPercentage on the total price</h6>
+        }
+        <div class="card-footer bg-white border-0 pb-0">
+            <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    <ul class="list-group mb-1">
+                        <li class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-dark fw-semibold text-uppercase">Quantity</h5>
+                            <h4 class="text-dark fw-bolder">@Model.Cart.TotalQuantity</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @if (Model.Cart.DiscountedPrice > 0)
+        {
+            <div class="card-footer bg-white border-0 pt-0">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <ul class="list-group mb-4">
+                            <li class="d-flex justify-content-between align-items-center">
+                                <h5 class="text-dark fw-semibold text-uppercase">Old Total (USD)</h5>
+                                <h4 class="text-dark fw-bolder text-decoration-line-through">@Model.Cart.TotalPrice.ToString("c")</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-white border-0 pt-0">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <ul class="list-group mb-4">
+                            <li class="d-flex justify-content-between align-items-center">
+                                <h5 class="text-dark fw-semibold text-uppercase">Total (USD)</h5>
+                                <h4 class="text-dark fw-bolder">$@Model.Cart.DiscountedPrice</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card-footer bg-white border-0 pt-0">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <ul class="list-group mb-4">
+                            <li class="d-flex justify-content-between align-items-center">
+                                <h5 class="text-dark fw-semibold text-uppercase">Total (USD)</h5>
+                                <h4 class="text-dark fw-bolder">@Model.Cart.TotalPrice.ToString("c")</h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-2 offset-md-5">
+                <a asp-area="Customer" asp-controller="Order" asp-action="Order" class="btn btn-primary border-0 bg-gradient w-100 py-2">Place Order</a>
+            </div>
+        </div>
+    </div>

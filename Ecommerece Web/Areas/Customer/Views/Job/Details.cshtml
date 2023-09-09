@@ -1,0 +1,79 @@
+﻿@model Job
+<div class="row pt-3 pb-3 d-flex justify-content-center">
+    <h1 class="text-center text-primary">@Model.Title</h1>
+</div>
+<div class="row">
+    <div class="card px-4 pt-3 pb-4 col-8 m-auto">
+        <div>
+            <div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4" data-mdb-ripple-color="light">
+                @if (Model.Image != null)
+                {
+                    <div class="img-fluid p-1 m-2 text-center">
+                        <img src="~/@Model.Image" width="90%" height="600px" idth="90%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                    </div>
+                }
+            </div>
+            <p class="text-dark"><span class="text-secondary">Description: </span>@Model.Description</p>
+            <p class="text-dark"><span class="text-secondary">Position: </span>@Model.Position</p>
+            <p class="text-dark"><span class="text-secondary">Requirement: </span>@Model.Requirement</p>
+            <p class="text-dark"><span class="text-secondary">Status: </span>@Model.Available</p>
+            <div class="row d-flex">
+                <div class="col-6 text-start">
+                    <p class="text-dark"><span class="text-secondary">Hours: </span>@Model.Hours</p>
+                </div>
+                <div class="col-6 text-center">
+                    <p class="text-dark"><span class="text-secondary">Salary: </span>@Model.Salary</p>
+                </div>
+            </div>
+            @if (Model.From != null && Model.To != null)
+            {
+                <div class="row d-flex">
+                    <div class="col-6 text-start">
+                        <p class="text-dark"><span class="text-secondary">From: </span>@Model.From</p>
+                    </div>
+                    <div class="col-6 text-center">
+                        <p class="text-dark"><span class="text-secondary">To: </span>@Model.To</p>
+                    </div>
+                </div>
+            }
+            <div class="row d-flex">
+                <div class="col-6 text-start">
+                    <p class="text-dark"><span class="text-secondary">Days: </span>@Model.Days</p>
+                </div>
+                <div class="col-6 text-center">
+                    <p class="text-dark"><span class="text-secondary">Off: </span>@Model.Off</p>
+                </div>
+            </div>
+            <div class="row d-flex">
+                <div class="col-4 text-start">
+                    <p class="text-dark"><span class="text-secondary">City: </span>@Model.City</p>
+                </div>
+                <div class="col-4 text-start">
+                    <p class="text-dark"><span class="text-secondary">Country: </span>@Model.Country</p>
+                </div>
+                <div class="col-4 text-start">
+                    <p class="text-dark"><span class="text-secondary">Address: </span>@Model.Address</p>
+                </div>
+            </div>
+            <div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4" data-mdb-ripple-color="light">
+                @if (Model.Location != null)
+                {
+                    <div class="img-fluid p-1 m-2 text-center">
+                        <iframe src="@Model.Location" style="border-radius:5px; border:1px solid #bbb9b9" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                }
+            </div>
+            @if (ViewBag.url == null)
+            {
+                <div class="row text-center">
+                    <a asp-action="Apply" asp-route-JID=@Model.Id>
+                        <h1 class="btn btn-success mb-3">Apply</h1>
+                    </a>
+                </div>
+            }
+            <div class="row text-end">
+                <u class="text-secondary">@Model.CreatedAt.DateTime</u>
+            </div>
+        </div>
+    </div>
+</div>

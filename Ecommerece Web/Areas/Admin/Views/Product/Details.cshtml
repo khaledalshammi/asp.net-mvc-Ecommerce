@@ -1,0 +1,87 @@
+﻿@model RelatedProductVM
+<div class="row">
+    <div class="col-10 pt-3">
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">Product Details</h2>
+                <hr />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Product.Name"></label>
+                <input asp-for="Product.Name" disabled class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Description"></label>
+                <input asp-for="Product.Description" disabled class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Quantity"></label>
+                <input asp-for="Product.Quantity" disabled class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Price"></label>
+                <input asp-for="Product.Price" disabled class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Category.Name"></label>
+                <input asp-for="Product.Category.Name" disabled class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.CreatedAt.DateTime"></label>
+                <input asp-for="Product.CreatedAt.DateTime" disabled class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.UpdatedAt.DateTime"></label>
+                <input asp-for="Product.UpdatedAt.DateTime" disabled class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Likes"></label>
+                <input asp-for="Product.Likes" disabled class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.DisLikes"></label>
+                <input asp-for="Product.DisLikes" disabled class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label for="NumComments">Total Comments</label>
+                @if (Model.Product.Comments != null)
+                {
+                    <input type="text" disabled name="NumComments" id="NumComments" value="@Model.Product.Comments.Count()" class="form-control" />
+                }
+                else
+                {
+                    <input type="text" disabled name="NumComments" id="NumComments" value="0" class="form-control" />
+                }
+            </div>
+            @if (Model.RelatedProducts.Count() > 0 && Model.RelatedProducts != null)
+            {
+                <div class="row">
+                    <h1 class="text-start">Related Products</h1>
+                    @foreach (Product p in Model.RelatedProducts)
+                    {
+                        <div class="border col-4 p-1 m-2 text-center">
+                            <a asp-action="Details" asp-route-id="@p.Id">
+                                <img src="@p.Images.FirstOrDefault().Url" class="card-img-top rounded" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+            <a asp-controller="Product" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                Back To List
+            </a>
+        </div>
+    </div>
+    <div class="col-2 pt-4" style="margin-top: 9px;">
+        @if (Model.Product.Images != null)
+        {
+            foreach (var image in Model.Product.Images)
+            {
+                <div class="border p-1 m-2 text-center">
+                    <img src="@image.Url" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                </div>
+            }
+        }
+    </div>
+</div>
